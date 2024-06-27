@@ -56,6 +56,17 @@ function processImage() {
     resultCanvas.height = canvas.height;
     const resultCtx = resultCanvas.getContext('2d');
     resultCtx.putImageData(imageData, 0, 0);
+
+    // Enable download button
+    const downloadButton = document.getElementById('downloadButton');
+    downloadButton.style.display = 'block';
+
+    // Create a download link
+    const downloadLink = document.getElementById('downloadLink');
+    resultCanvas.toBlob(function(blob) {
+        const url = URL.createObjectURL(blob);
+        downloadLink.href = url;
+    }, 'image/png');
 }
 
 function contrast(value) {
